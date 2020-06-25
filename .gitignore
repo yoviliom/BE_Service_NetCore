@@ -1,0 +1,15 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PolicyService/.vs/PolicyService
+/PolicyService/Policy.Api/bin/Debug/netcoreapp3.1
+/PolicyService/Policy.Api/obj
+/PolicyService/Policy.Data/obj
+/PolicyService/Policy.Data/bin/Debug/netcoreapp3.1
+/PolicyService/Policy.Data.EF/obj
+/PolicyService/Policy.Data.EF/bin/Debug/netcoreapp3.1
+/PolicyService/Policy.Infrastructure/obj
+/PolicyService/Policy.Infrastructure/bin/Debug/netcoreapp3.1
+/PolicyService/Policy.Application/obj
+/PolicyService/Policy.Application/bin/Debug/netcoreapp3.1
