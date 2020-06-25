@@ -32,11 +32,11 @@ namespace Policy.Application.Implementations
             query = query.OrderByDescending(x => x.Status).
                 ThenBy(x => x.CreatedDate).Skip((page - 1) * pageSize).Take(pageSize);
 
-            var pagingData = query.ProjectTo<ContractDTO>().ToList();
+            //var pagingData = query.ProjectTo<ContractDTO>().ToList();
 
             return new PagedResult<ContractDTO>()
             {
-                Results = pagingData,
+                Results = null,
                 CurrentPage = page,
                 RowCount = totalRow,
                 PageSize = pageSize
@@ -45,7 +45,7 @@ namespace Policy.Application.Implementations
 
         public void Insert(ContractDTO contract)
         {
-            Contract contactInsert = Mapper.Map<Contract>(contract);
+            Contract contactInsert = new Contract();
 
             _contractRepo.Add(contactInsert);
 
