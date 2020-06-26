@@ -13,7 +13,7 @@ namespace Policy.Data.EF
         public PolicyDbContext(DbContextOptions<PolicyDbContext> options) : base(options) { }
 
         public DbSet<Contract> Contracts { set; get; }
-
+        public DbSet<ProfileUser> ProfileUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

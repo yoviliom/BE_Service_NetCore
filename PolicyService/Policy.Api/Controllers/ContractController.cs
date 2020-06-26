@@ -25,6 +25,8 @@ namespace Policy.Api.Controllers
             try
             {
                 _contractService.Insert(contract);
+
+
                 return new EndpointResult("OK");
             }
             catch (Exception ex)
