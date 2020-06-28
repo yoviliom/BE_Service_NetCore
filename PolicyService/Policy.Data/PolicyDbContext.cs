@@ -18,6 +18,13 @@ namespace Policy.Data.EF
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Conduct> Conducts { get; set; }
+        public DbSet<Nation> Nations { get; set; }
+        public DbSet<Ranking> Rankings { get; set; }
+        public DbSet<Religion> Religions { get; set; }
+        public DbSet<Semester> Semesters { get; set; }
+        public DbSet<StudentClass> StudentClasses { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
