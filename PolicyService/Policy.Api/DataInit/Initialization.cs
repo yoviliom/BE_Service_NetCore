@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Policy.Application.Implementations;
+using Policy.Application.Interfaces;
+using Policy.Data.EF;
+using Policy.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +38,13 @@ namespace Policy.Api.DataInit
             return services;
         }
 
+        public static void RegisterServiceBusinessInterface(this IServiceCollection services)
+        {
+            services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
+            services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
+
+            services.AddTransient<IProvinceService, ProvinceService>();
+        }
         //public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         //{
         //    services.AddSwaggerGen(options =>

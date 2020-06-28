@@ -14,6 +14,7 @@ namespace Policy.Application.AutoMapper
         public ViewModelToDomainMappingProfile()
         {
             CreateMap<ContractDTO, Contract>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<ProvinceDTO, Province>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }

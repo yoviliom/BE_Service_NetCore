@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Policy.Api.DataInit;
 using Policy.Data.ConnectContext;
+using Policy.Data.EF;
 
 namespace Policy.Api
 {
@@ -20,9 +22,10 @@ namespace Policy.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DBContext>(options =>
+            services.AddDbContext<PolicyDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
             services.AddControllers();
+            services.RegisterServiceBusinessInterface();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

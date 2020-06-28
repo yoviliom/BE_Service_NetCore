@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Policy.Application\Policy.Application.csproj" />
+    <ProjectReference Include="..\Policy.Data\Policy.Data.EF.csproj" />
   </ItemGroup>
 
 
