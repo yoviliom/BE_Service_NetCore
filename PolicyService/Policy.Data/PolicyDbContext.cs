@@ -12,8 +12,13 @@ namespace Policy.Data.EF
     {
         public PolicyDbContext(DbContextOptions<PolicyDbContext> options) : base(options) { }
 
-        public DbSet<Contract> Contracts { set; get; }
-        public DbSet<ProfileUser> ProfileUsers { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<Ward> Wards { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Policy.Data.EF;
 
 namespace Policy.Data.EF.Migrations
 {
     [DbContext(typeof(PolicyDbContext))]
-    partial class PolicyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200628142554_entiitesinit")]
+    partial class entiitesinit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,8 +97,10 @@ namespace Policy.Data.EF.Migrations
 
             modelBuilder.Entity("Policy.Data.Entities.Province", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
