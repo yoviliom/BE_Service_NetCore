@@ -15,6 +15,8 @@ namespace Policy.Application.AutoMapper
         {
             CreateMap<ContractDTO, Contract>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<ProvinceDTO, Province>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<StudentDTO, Student>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<TeacherDTO, Teacher>().ForMember(x => x.Id, opt => opt.Ignore());
         }
     }
 }
