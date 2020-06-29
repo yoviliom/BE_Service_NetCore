@@ -18,6 +18,7 @@ namespace Policy.Data.Entities
 
         public string Name { get; set; }
 
+
         public Province()
         {
             Status = Status.InActive;

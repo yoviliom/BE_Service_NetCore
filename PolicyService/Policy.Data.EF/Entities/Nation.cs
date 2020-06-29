@@ -18,6 +18,9 @@ namespace Policy.Data.Entities
         public long UpdatedBy { get; set; }
         public Status Status { get; set; }
 
+        public string TenQG { get; set; }
+        public string MaQG { get; set; }
+
         public Nation()
         {
             Status = Status.InActive;

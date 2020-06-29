@@ -18,6 +18,9 @@ namespace Policy.Data.Entities
         public long UpdatedBy { get; set; }
         public Status Status { get; set; }
 
+        public string MaHK { get; set; }
+        public string TenLoaiHK { get; set; }
+
         public Conduct()
         {
             Status = Status.InActive;

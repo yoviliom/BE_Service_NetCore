@@ -18,6 +18,8 @@ namespace Policy.Data.Entities
         public long UpdatedBy { get; set; }
         public Status Status { get; set; }
 
+        public string Name { get; set; }
+
         public Religion()
         {
             Status = Status.InActive;
