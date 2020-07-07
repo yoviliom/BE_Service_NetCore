@@ -44,6 +44,7 @@ namespace Policy.Api.DataInit
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
             services.AddTransient<IProvinceService, ProvinceService>();
+            services.AddTransient<IStudentService, StudentService>();
         }
         //public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         //{

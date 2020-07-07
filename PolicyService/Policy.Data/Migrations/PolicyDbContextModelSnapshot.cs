@@ -73,8 +73,14 @@ namespace Policy.Data.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MaHK")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("TenLoaiHK")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -135,8 +141,14 @@ namespace Policy.Data.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MaQG")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
+
+                    b.Property<string>("TenQG")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("UpdatedBy")
                         .HasColumnType("bigint");
@@ -222,6 +234,9 @@ namespace Policy.Data.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -250,6 +265,12 @@ namespace Policy.Data.EF.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<string>("MaHk")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -257,6 +278,9 @@ namespace Policy.Data.EF.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("Year")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

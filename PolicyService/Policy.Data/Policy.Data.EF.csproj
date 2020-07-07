@@ -18,4 +18,9 @@
     <ProjectReference Include="..\Policy.Data.EF\Policy.Data.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+    <Folder Include="ScriptDB\" />
+  </ItemGroup>
+
 </Project>

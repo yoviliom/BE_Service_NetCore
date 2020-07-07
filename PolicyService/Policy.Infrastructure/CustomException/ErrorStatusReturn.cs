@@ -1,12 +1,22 @@
-﻿namespace Policy.Infrastructure.Exception
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Policy.Infrastructure.Exception
 {
     public enum ErrorStatusReturn
     {
-        SUCCESS,
-        MODEL_NOT_VALID,
+
+        [Display(Name = "Dữ liệu request không hợp lệ")]
+        REQUEST_NULL,
+
+        [Display(Name = "Không tìm thấy dữ liệu yêu cầu")]
+        NOT_FOUND,
+
+        [Display(Name = "Lỗi hệ thống, vui lòng liên hệ Administrator")]
         SYSTEM_ERROR,
 
-        NOT_FOUND,
+        SUCCESS,
+        MODEL_NOT_VALID,
+
         CAN_NOT_LOGIN_DASHBOARD,
         USER_HAS_REGISTER,
         CAN_NOT_LOGIN_FRONTEND,

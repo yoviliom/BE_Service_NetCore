@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Policy.Application.Interfaces;
 using Policy.Data.Entities;
 using Policy.Infrastructure.Response;
@@ -20,14 +21,12 @@ namespace Policy.Api.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<EndpointResult> Insert([FromBody]Province province)
         {
             try
             {
-                _provinceService.Insert(new Province()
-                {
-                    Name = "New"
-                });
+                _provinceService.Insert(province);
 
                 return new EndpointResult("OK");
             }
