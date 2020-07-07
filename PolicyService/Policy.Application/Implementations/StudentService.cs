@@ -23,10 +23,12 @@ namespace Policy.Application.Implementations
             _mapper = mapper;
         }
 
-        public void Delete(string id)
+        public void Delete(string code)
         {
-
-            throw new NotImplementedException();
+            Student student = _studenRepo.FindAll(x => x.Code == code).FirstOrDefault();
+            if (student == null) throw new UserException(ErrorStatusReturn.NOT_FOUND);
+            _studenRepo.Remove(student);
+            _unitOfWork.SaveChanges();
         }
 
         public void Insert(Student student)
@@ -40,7 +42,7 @@ namespace Policy.Application.Implementations
         public StudentDTO Select(string code)
         {
             Student student = _studenRepo.FindAll(x => x.Code == code).FirstOrDefault();
-            if (student == null) throw new UserException(ErrorStatusReturn.ADDRESS_DETAIL_NOT_FOUND);
+            if (student == null) throw new UserException(ErrorStatusReturn.NOT_FOUND);
             StudentDTO resultStudent = _mapper.Map<StudentDTO>(student);
             return resultStudent;
         }

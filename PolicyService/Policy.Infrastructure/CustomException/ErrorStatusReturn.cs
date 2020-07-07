@@ -14,6 +14,9 @@ namespace Policy.Infrastructure.Exception
         [Display(Name = "Lỗi hệ thống, vui lòng liên hệ Administrator")]
         SYSTEM_ERROR,
 
+        [Display(Name = "Không tìm thấy thông tin")]
+        NOT_FOUND_INFO,
+
         SUCCESS,
         MODEL_NOT_VALID,
 
