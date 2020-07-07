@@ -42,7 +42,7 @@ namespace Policy.Api.Controllers
         /// </summary>
         /// <param name="teacherCode"></param>
         /// <returns></returns>
-        [Route("getTeachersByCode/{studentCode}")]
+        [Route("getTeachersByCode/{teacherCode}")]
         [HttpGet]
         [AllowAnonymous]
         public async Task<EndpointResult> GetTeacherByCode(string teacherCode)
