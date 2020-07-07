@@ -45,6 +45,8 @@ namespace Policy.Api.DataInit
 
             services.AddTransient<IProvinceService, ProvinceService>();
             services.AddTransient<IStudentService, StudentService>();
+            services.AddTransient<ITeacherService, TeacherService>();
+            services.AddTransient<IPermissionService, PermissionService>();
         }
         //public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
         //{

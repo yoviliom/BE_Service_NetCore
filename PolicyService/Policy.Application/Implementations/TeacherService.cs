@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace Policy.Application.Implementations
 {
-    class TeacherService : ITeacherService
+    public class TeacherService : ITeacherService
     {
 
         private readonly IRepository<Teacher, string> _teacherRepo;

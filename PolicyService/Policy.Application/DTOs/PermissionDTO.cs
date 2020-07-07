@@ -4,7 +4,15 @@ using System.Text;
 
 namespace Policy.Application.DTOs
 {
-    class PermissionDTO
+    public class PermissionDTO
     {
+        public string Code { get; set; }
+        public int UserType { get; set; }
+        public bool SystemManager { get; set; }
+        public bool StudentManager { get; set; }
+        public bool TeacherManager { get; set; }
+        public bool ScorceManager { get; set; }
+        public bool ClassManager { get; set; }
+        public bool ConductManager { get; set; }
     }
 }
