@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Policy.Application.DTOs;
 using Policy.Application.Interfaces;
 using Policy.Data.Entities;
 using Policy.Infrastructure.Response;
@@ -49,9 +50,9 @@ namespace Policy.Api.Controllers
         {
             try
             {
-                _teacherService.Select(teacherCode);
+                TeacherDTO teacher = _teacherService.Select(teacherCode);
 
-                return new EndpointResult(teacherCode);
+                return new EndpointResult(teacher);
             }
             catch (Exception ex)
             {

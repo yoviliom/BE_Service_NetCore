@@ -17,6 +17,7 @@ namespace Policy.Application.AutoMapper
             CreateMap<ProvinceDTO, Province>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<StudentDTO, Student>().ForMember(x => x.Id, opt => opt.Ignore());
             CreateMap<TeacherDTO, Teacher>().ForMember(x => x.Id, opt => opt.Ignore());
+            CreateMap<PermissionDTO, Permission>().ForMember(x => x.Code, opt => opt.Ignore());
         }
     }
 }

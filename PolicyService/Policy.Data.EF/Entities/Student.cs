@@ -20,6 +20,8 @@ namespace Policy.Data.Entities
         public string AddressId { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Fullname { get; set; }
+        public string Gender { get; set; }
+        public int UserType { get; set; }
 
         public Student()
         {

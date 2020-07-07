@@ -25,6 +25,10 @@ namespace Policy.Data.EF
         public DbSet<Semester> Semesters { get; set; }
         public DbSet<StudentClass> StudentClasses { get; set; }
         public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Class> Classes { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<ProfileUser> ProfileUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

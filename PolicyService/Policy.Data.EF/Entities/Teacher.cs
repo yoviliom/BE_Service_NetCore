@@ -21,6 +21,8 @@ namespace Policy.Data.Entities
         public string Fullname { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Mobile { get; set; }
+        public string Gender { get; set; }
+        public int UserType { get; set; }
 
         public Teacher()
         {

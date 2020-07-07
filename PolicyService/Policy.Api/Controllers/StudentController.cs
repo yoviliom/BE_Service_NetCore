@@ -51,9 +51,9 @@ namespace Policy.Api.Controllers
         {
             try
             {
-                _studentService.Select(studentCode);
+                StudentDTO studen = _studentService.Select(studentCode);
 
-                return new EndpointResult(studentCode);
+                return new EndpointResult(studen);
             }
             catch (Exception ex)
             {
