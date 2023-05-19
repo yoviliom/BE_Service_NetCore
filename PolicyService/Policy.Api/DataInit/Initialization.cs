@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Policy.Application.DTOs;
 using Policy.Application.Implementations;
 using Policy.Application.Interfaces;
 using Policy.Data.EF;
@@ -8,7 +13,8 @@ using Policy.Infrastructure.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Reflection;
+using System.Text;
 
 namespace Policy.Api.DataInit
 {
@@ -43,39 +49,104 @@ namespace Policy.Api.DataInit
             services.AddTransient(typeof(IUnitOfWork), typeof(EFUnitOfWork));
             services.AddTransient(typeof(IRepository<,>), typeof(EFRepository<,>));
 
-            services.AddTransient<IProvinceService, ProvinceService>();
-            services.AddTransient<IStudentService, StudentService>();
-            services.AddTransient<ITeacherService, TeacherService>();
-            services.AddTransient<IPermissionService, PermissionService>();
+      
         }
-        //public static IServiceCollection AddCustomSwagger(this IServiceCollection services, IConfiguration configuration)
-        //{
-        //    services.AddSwaggerGen(options =>
-        //    {
-        //        options.DescribeAllEnumsAsStrings();
-        //        options.SwaggerDoc("v1", new OpenApiInfo
-        //        {
-        //            Title = "Policy repository - Policy HTTP API",
-        //            Version = "v1",
-        //            Description = "The Policy Service HTTP API"
-        //        });
+        public static IServiceCollection AddCustomSwagger(this IServiceCollection services)
+        {
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Repository - HTTPS API",
+                    Version = "v1",
+                    Description = "Service HTTPS API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                });
+                options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Enter 'Bearer' [space] and then your valid token in the text input below.\r\n\r\nExample: \"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9\"",
+                });
+                options.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+                        },
+                        System.Array.Empty<string>()
+                    }
+                });
+            });
+            return services;
+        }
 
-        //    });
+        public static IEnumerable<string> GetApiVersions(Assembly webApiAssembly)
+        {
+            var apiVersion = webApiAssembly.DefinedTypes
+               .Where(x => x.IsSubclassOf(typeof(Controller)) && x.GetCustomAttributes<ApiVersionAttribute>().Any())
+               .Select(y => y.GetCustomAttribute<ApiVersionAttribute>())
+               .SelectMany(v => v.Versions)
+               .Distinct()
+               .OrderBy(x => x);
 
-        //    return services;
-        //}
+            return apiVersion.Select(x => x.ToString());
+        }
 
-        //public static IEnumerable<string> GetApiVersions(Assembly webApiAssembly)
-        //{
-        //    var apiVersion = webApiAssembly.DefinedTypes
-        //        .Where(x => x.IsSubclassOf(typeof(Controller)) && x.GetCustomAttributes<ApiVersionAttribute>().Any())
-        //        .Select(y => y.GetCustomAttribute<ApiVersionAttribute>())
-        //        .SelectMany(v => v.Versions)
-        //        .Distinct()
-        //        .OrderBy(x => x);
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            var appSettingSection = configuration.GetSection("AppSetting");
+            services.Configure<AppSetting>(appSettingSection);
 
-        //    return apiVersion.Select(x => x.ToString());
-        //}
+            var fireBaseSection = configuration.GetSection("FireBase");
+            services.Configure<FireBase>(fireBaseSection);
+
+            var appSetting = appSettingSection.Get<AppSetting>();
+            var key = Encoding.ASCII.GetBytes(appSetting.Key);
+
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(key),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                RequireExpirationTime = true,
+                ValidateLifetime = true
+            };
+
+            services.AddSingleton(tokenValidationParameters);
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                //options.Authority = "https://dev-khanhlinh.au.auth0.com/";
+                //options.Audience = "https://uniduc/v1/api/connect/token";
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.TokenValidationParameters = tokenValidationParameters;
+            });
+
+            return services;
+        }
 
         //public static IServiceCollection AddCustomDbContext(this IServiceCollection services, IConfiguration configuration)
         //{

@@ -12,23 +12,8 @@ namespace Policy.Data.EF
     {
         public PolicyDbContext(DbContextOptions<PolicyDbContext> options) : base(options) { }
 
-        public DbSet<Province> Provinces { get; set; }
-        public DbSet<District> Districts { get; set; }
-        public DbSet<Ward> Wards { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Conduct> Conducts { get; set; }
-        public DbSet<Nation> Nations { get; set; }
-        public DbSet<Ranking> Rankings { get; set; }
-        public DbSet<Religion> Religions { get; set; }
-        public DbSet<Semester> Semesters { get; set; }
-        public DbSet<StudentClass> StudentClasses { get; set; }
-        public DbSet<Subject> Subjects { get; set; }
+       
         public DbSet<Account> Accounts { get; set; }
-        public DbSet<Class> Classes { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
-        public DbSet<ProfileUser> ProfileUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

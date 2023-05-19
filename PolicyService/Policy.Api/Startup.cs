@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Policy.Api.DataInit;
+using Policy.Application.AutoMapper;
 using Policy.Data.ConnectContext;
 using Policy.Data.EF;
 
@@ -27,6 +28,13 @@ namespace Policy.Api
             services.AddControllers();
             services.RegisterServiceBusinessInterface();
             services.AddAutoMapper(typeof(Startup));
+
+            // Adding AutoMapper
+            services.AddAutoMapper(typeof(AutoMapperConfig));
+            // Adding Swagger
+            services.AddCustomSwagger();
+            // Adding JWT Authentication  
+            services.AddCustomAuthentication(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +49,13 @@ namespace Policy.Api
 
             app.UseRouting();
 
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UniducService v1"));
+
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
